@@ -100,6 +100,11 @@ class DataTransformation:
             
             logging.info("Saved the preprocessor object to the specified path")
             
+            # save train and test array to the specified path
+            np.save(os.path.join('artifacts', 'train_array.npy'), train_array)
+            np.save(os.path.join('artifacts', 'test_array.npy'), test_array)
+            logging.info("Data transformation is completed")
+            
             return (
                 train_array,
                 test_array,
@@ -109,9 +114,3 @@ class DataTransformation:
         except Exception as e:
             logging.info("Exception occurred at make data transformation stage")
             raise CustomException(e, sys)
-    
-    
-
-    
-    
-    

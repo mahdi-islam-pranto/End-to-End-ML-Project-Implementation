@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
+from src.components.model_trainer import ModelTrainer
 from src.utils import save_object
 
 # class for data ingestion configuration, where we will specify the path to store the train, test and raw data
@@ -55,13 +56,20 @@ class DataIngestion:
             raise CustomException(e, sys)
         
 
-# test the data ingestion component and transformation component by running this file
+# test the data ingestion component and transformation component and model trainer by running this file
 if __name__ == "__main__":
+    # testing the data ingestion component
     obj = DataIngestion()
     # obj.initiate_data_ingestion()
     train_data_path, test_data_path = obj.initiate_data_ingestion()
     
+    # testing the data transformation component
     data_transformation_obj = DataTransformation()
-    data_transformation_obj.make_data_transformation(
+    # data_transformation_obj.make_data_transformation(train_data_path=train_data_path, test_data_path=test_data_path)
+    train_arr, test_arr, _ = data_transformation_obj.make_data_transformation(
     train_data_path=train_data_path, test_data_path=test_data_path)
+    
+    # testing the model trainer component
+    model_trainer_obj = ModelTrainer()
+    print(model_trainer_obj.initiate_model_trainer(train_arr, test_arr))
     
