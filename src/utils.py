@@ -5,6 +5,7 @@ from src.exception import CustomException
 import pickle
 import dill
 from sklearn.metrics import r2_score
+from sklearn.model_selection import GridSearchCV
 
 # utility function to save the preprocessor object (ml model object after training -> pickle file) to the specified path
 def save_object(file_path, obj):
@@ -21,13 +22,22 @@ def save_object(file_path, obj):
         raise CustomException(e, sys)
     
     
-def evaluate_models(X_train, y_train, X_test, y_test, models):
+def evaluate_models(X_train, y_train, X_test, y_test, models, params):
     
     try:
         report = {}
         
         for i in range(len(models)):
+            # getting the model name from the models dictionary
             model = list(models.values())[i]
+            # getting the parameters for the model from the params dictionary
+            parameters = params[list(models.keys())[i]]
+            
+            # creating the GridSearchCV object for the model and parameters
+            gs = GridSearchCV(model,parameters,cv=3)
+            gs.fit(X_train, y_train)
+            # setting the model parameters to the best parameters found by GridSearchCV
+            model.set_params(**gs.best_params_)
             
             # Train model
             model.fit(X_train, y_train)
