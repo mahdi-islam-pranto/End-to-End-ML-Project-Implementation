@@ -1,0 +1,4 @@
+[ 2026-03-18 01:02:40,865 ] 74 root - INFO - Dataframe is created from the input data
+[ 2026-03-18 01:02:41,119 ] 21 root - INFO - Model and preprocessor objects are loaded for prediction
+[ 2026-03-18 01:02:41,131 ] 25 root - INFO - Input features are transformed using the preprocessor object
+[ 2026-03-18 01:02:41,131 ] 29 root - INFO - Predictions are made using the model object

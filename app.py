@@ -1,14 +1,15 @@
 from src.pipeline.prediction_pipeline import PredictPipeline, TransformFeatureData
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Literal
 
 # class for the input data/features for prediction
 class InputData(BaseModel):
-    gender: str
-    race_ethnicity: str
-    parental_level_of_education: str
-    lunch: str
-    test_preparation_course: str
+    gender: Literal['male', 'female']
+    race_ethnicity: Literal['group A', 'group B', 'group C', 'group D', 'group E']
+    parental_level_of_education: Literal['some high school', 'high school', 'some college', "associate's degree", "bachelor's degree", "master's degree"]
+    lunch: Literal['standard', 'free/reduced']
+    test_preparation_course: Literal['none', 'completed']
     reading_score: int
     writing_score: int
 
