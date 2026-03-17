@@ -57,3 +57,13 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
         logging.info("Exception occurred while evaluating models")
         raise CustomException(e, sys)
     
+
+# utility function to load the preprocessor object or model object (ml model object after training -> pickle file) from the specified path
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
+
+    except Exception as e:
+        raise CustomException(e, sys)
+    
