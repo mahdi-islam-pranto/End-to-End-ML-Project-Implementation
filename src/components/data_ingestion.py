@@ -44,6 +44,7 @@ class DataIngestion:
             
             logging.info("Ingestion of the data and train test split is completed")
             
+            # returning the path to the train and test data
             return (
                 self.ingestion_config.train_data_path,
                 self.ingestion_config.test_data_path

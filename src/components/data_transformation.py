@@ -52,6 +52,7 @@ class DataTransformation:
             logging.info(f"Numerical columns: {numerical_columns}")
             logging.info(f"Categorical columns: {categorical_columns}")
             
+            # applying the transformations on the numerical and categorical columns using the pipelines defined above
             # combining the numerical and categorical pipeline using column transformer
             preprocessor = ColumnTransformer(
                 transformers=[
@@ -60,11 +61,14 @@ class DataTransformation:
                 ]
             )
             
+            logging.info("Data transformation pipelines for numerical and categorical columns are defined")
+            
             return preprocessor
            
         except Exception as e:
             logging.info("Exception occurred at define data transformation stage")
             raise CustomException(e, sys)
+    
         
     def make_data_transformation(self, train_data_path, test_data_path):
         '''This function is responsible for performing data transformation on the train and test data and saving the preprocessor object to the specified path'''
